@@ -28,7 +28,7 @@ export const Todos = () => {
                 onChange={(e) => setEditText(e.target.value)}
               />
             ) : (
-              <li className= {`${todo.isDone ? "line-through " : " "}px-[15px] text-white py-[7px] text-base font-semibold list-none w-[70%]`}>
+              <li style={{textDecorationThickness : '2px'}} className= {`${todo.isDone ? "line-through " : " "}px-[15px] text-white py-[7px] text-base font-semibold list-none w-[70%]`}>
                 {todo.text}
               </li>
             )}
