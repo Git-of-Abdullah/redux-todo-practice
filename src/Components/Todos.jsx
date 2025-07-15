@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RemoveTodo, UpdateTodo } from '../features/TodoSlice';
+import { DoneTodo, RemoveTodo, UpdateTodo } from '../features/TodoSlice';
 
 export const Todos = () => {
   const todos = useSelector((state) => state.TodoSlice.todos);
@@ -28,7 +28,7 @@ export const Todos = () => {
                 onChange={(e) => setEditText(e.target.value)}
               />
             ) : (
-              <li className="px-[15px] text-white py-[7px] text-base font-semibold list-none w-[70%]">
+              <li className= {`${todo.isDone ? "line-through " : " "}px-[15px] text-white py-[7px] text-base font-semibold list-none w-[70%]`}>
                 {todo.text}
               </li>
             )}
@@ -46,7 +46,9 @@ export const Todos = () => {
                 </button>
               ) : (
                 <>
-                  
+                  <button onClick={() => { dispatch(DoneTodo(todo.id))}} className='flex items-center justify-center w-[30px] h-[30px] rounded  cursor-pointer hover:bg-green-500 bg-green-600'>
+                  ✔
+                  </button>
                   <button
                     onClick={() => {
                       setEditId(todo.id);
@@ -88,6 +90,7 @@ export const Todos = () => {
                       />
                     </svg>
                   </button>
+                  
                 </>
               )}
             </div>

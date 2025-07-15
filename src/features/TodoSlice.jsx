@@ -4,7 +4,8 @@ const initialState = {
   todos: [
     {
       id: 1,
-      text: "Hello World"
+      text: "Hello World",
+      isDone: false
     }
   ]
 };
@@ -16,7 +17,8 @@ export const TodoSlice = createSlice({
     AddTodo: (state, action) => {
         const new_todo = {
             id: nanoid(),
-            text:action.payload
+            text:action.payload,
+            isDone: false
         }
       state.todos.push(new_todo);
     },
@@ -33,12 +35,22 @@ export const TodoSlice = createSlice({
                 }
             return todo
         })
-    }
+    },
+    DoneTodo:  (state,action) => {
+      state.todos = state.todos.map((todo) => 
+      {
+          if(todo.id === action.payload)
+              {
+                  return {...todo, isDone: !(todo.isDone)}
+              }
+          return todo
+      })
+  }
   },
 
 });
 
 
-export const { AddTodo, RemoveTodo, UpdateTodo } = TodoSlice.actions;
+export const { AddTodo, RemoveTodo, UpdateTodo, DoneTodo } = TodoSlice.actions;
 
 export default TodoSlice.reducer;
